@@ -1,0 +1,64 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 500px; "><b>Search Product</b></h3>
+    <form method="post">
+        <table border="2" width="450px" style="background-color: violet;" align="center">
+            <tr style="background-color: rgb(7, 163, 20);">
+                <th>Category</th>
+                <td>
+                    <select name="category" id="category">
+                        <option value="">---select---</option>
+                        {% for i in dis %}
+                        <option value="{{ i.id }}">{{ i.category }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+                <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsearch" value="search">
+                </td>
+            </tr>
+        </table>
+    <br>
+    <hr>
+    <br>
+    <table align="center">
+        <tr>
+
+            {% for x in name %}
+            <td>
+                <p style="border:1px solid black; align-items: center;">
+                    <img src="{{x.photo.url}}" width="120" height="120"><br>
+                    {{ x.name}}<br>
+                    {{ x.rate }}<br>
+                    {{ x.details}}<br>
+                    <a href="{% url 'User:viewmore-product' x.id %}">View more</a>
+                </p>
+            </td>
+
+            {% endfor %}
+        </tr>
+    </table>
+    </form>
+    </div>
+</body>
+
+</html>
+<br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

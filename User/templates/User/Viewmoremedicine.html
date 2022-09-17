@@ -1,0 +1,49 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+        <br><br><br>
+    <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <br>
+    <hr>
+    <br>
+    <table align="center">
+        <tr>
+
+            
+            <td>
+                <p style="border:1px solid black; align-items: center;">
+                    <img src="{{name.photo.url}}" width="120" height="120"><br>
+                    {{ name.name}}<br>
+                    {{ name.rate }}<br>
+                    {{ name.details}}<br>
+                    {% if name.stock > 0 %}
+                    <a href="{% url 'User:Buy-medicine' name.id %}">Buy product</a>
+                    {% else %}
+                    <p>Out of stock</p>
+                    {% endif %}
+                    </p>
+                </p>
+            </td>
+
+    
+        </tr>
+    </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br>
+
+{% endblock %}

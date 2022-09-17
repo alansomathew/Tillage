@@ -1,0 +1,91 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Add product</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+            <tr>
+            <th>Name</th>
+            <td>
+                <input type="text" name="productname" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td>
+                <input type="text" name="rate" required autocomplete="off">
+            </td>
+        </tr>
+       
+        <tr>
+            <th>Category</th>
+            <td>
+                <select name="category" id="category">
+                    <option value="">---select---</option>
+                    {% for i in dis %}
+                    <option value="{{ i.id }}">{{ i.category }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Stock</th>
+            <td>
+                <input type="text" name="stock" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Photo</th>
+            <td>
+                <input type="file" name="photo" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="btnsubmit" value="save">
+                <input type="reset" name="btncancel" value="cancel">
+            </td>
+        </tr>
+    </table>
+        <br>
+        <hr>
+        <br>
+        <table border="2" align="center">
+            <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Stock</th>
+                <th>Photo</th>
+                <th>Manage Stock</th>
+                <th>Action</th>
+            </tr>
+            {% for x in name %}
+            <tr>
+                <td>{{ x.name}}</td>
+                <td>{{ x.rate }}</td>
+                <td>{{x.stock}}</td>
+                <td><img src="{{ x.photo.url }}" width="120" height="120"></td>
+                <td><a href="{% url 'User:Add-stock' x.id %}">Add stock</a></td>
+                <td><a href="{% url 'User:del-product' x.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br>
+
+{% endblock %}

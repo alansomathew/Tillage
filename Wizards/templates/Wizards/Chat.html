@@ -1,0 +1,156 @@
+{% load static %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+
+    <title>Chat</title>
+    <link rel="icon" type="image/png" href="{% static 'assets/img/favicon.png' %}" />
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Roboto:400,500" rel="stylesheet">
+    <!-- Core CSS -->
+    <link rel="stylesheet" href="{% static 'assets/css/app.css' %}">
+    <link rel="stylesheet" href="{% static 'assets/css/core.css' %}">
+
+</head>
+<!-- select query -->
+
+<body>
+
+    <!-- Pageloader -->
+    <div class="pageloader"></div>
+    <div class="infraloader is-active"></div>
+
+    <div class="chat-wrapper is-standalone">
+        <div class="chat-inner">
+
+            <!-- Chat top navigation -->
+            <div class="chat-nav">
+                <div class="nav-start">
+                    <div class="recipient-block">
+                        <div class="avatar-container">
+                           <!-- img -->
+                        </div>
+                        <div class="username">
+                            <span>
+                                {{ chatobj.user.name }}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+                <div class="nav-end">
+
+                    <a href="{% url 'Wizards:WizardsHome' %}" class="chat-nav-item is-icon is-hidden-mobile">
+                        <i data-feather="home"></i>
+                    </a>
+
+                </div>
+            </div>
+
+            <form method="post">
+                {% csrf_token %}
+                <!-- Chat body -->
+                <div id="chat-body" class="chat-body">
+                    <!-- Conversation -->
+                    <div id="conversation" class="chat-body-inner has-slimscroll">
+
+                    </div>
+                    <!-- Compose message area -->
+                    <div class="chat-action">
+                        <div class="chat-action-inner">
+                            <div class="control" style="text-align: center">
+                                <input type="hidden" name="cid" id="cid" value="{{chatobj.user.id}}" />
+                                <textarea class="textarea comment-textarea" id="msg" name="msg" rows="2"></textarea>
+                                <input type="submit" value="Send" name="btn_send" id="btn_send" style="border: none;background-color: #5082c3;border-radius: 15px 10px; color: white;
+                                       margin: 10px; margin-bottom: 30px ; width: 30%; height: 25px">
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </form>
+
+        </div>
+    </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
+    <script>
+
+        function sendChat() {
+
+            var chat = document.getElementById("msg").value;
+            var cid = document.getElementById("cid").value;
+            if (chat.length <= 35) {
+                $.ajax({
+                    url: "/Wizards/ajaxchat/",
+                    data: "chat=" + chat + "&cid=" + cid,
+                    success: function (result) {
+
+
+                        document.getElementById("msg").value = "";
+
+                        $('#conversation').animate({ scrollTop: $('#conversation')[0].scrollHeight });
+
+
+                    }
+                });
+            }
+            else {
+                alert("Character Length less Than 35 Allowed");
+                document.getElementById("msg").value = "";
+
+                $('#conversation').animate({ scrollTop: $('#conversation')[0].scrollHeight });
+            }
+
+        }
+        $(document).ready(function () {
+            setInterval(function () {
+                var cid = document.getElementById("cid").value;
+                console.log(cid);
+                $("#conversation").load('/Wizards/Loadchat/?cid=' + cid)
+            }, 50);
+        });
+
+    </script>
+    <!-- Concatenated js plugins and jQuery -->
+    <script src="{% static 'assets/js/app.js' %}"></script>
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{% static 'assets/data/tipuedrop_content.js' %}"></script>
+
+    <!-- Core js -->
+    <script src="{% static 'assets/js/global.js' %}"></script>
+
+    <!-- Navigation options js -->
+    <script src="{% static 'assets/js/navbar-v1.js' %}"></script>
+    <script src="{% static 'assets/js/navbar-v2.js' %}"></script>
+    <script src="{% static 'assets/js/navbar-mobile.js' %}"></script>
+    <script src="{% static 'assets/js/navbar-options.js' %}"></script>
+    <script src="{% static 'assets/js/sidebar-v1.js' %}"></script>
+
+    <!-- Core instance js -->
+    <script src="{% static 'assets/js/main.js' %}"></script>
+    <script src="{% static 'assets/js/chat.js' %}"></script>
+    <script src="{% static 'assets/js/touch.js' %}"></script>
+    <script src="{% static 'assets/js/tour.js' %}"></script>
+
+    <!-- Components js -->
+    <script src="{% static 'assets/js/explorer.js' %}"></script>
+    <script src="{% static 'assets/js/widgets.js' %}"></script>
+    <script src="{% static 'assets/js/modal-uploader.js' %}"></script>
+    <script src="{% static 'assets/js/popovers-users.js' %}"></script>
+    <script src="{% static 'assets/js/popovers-pages.js' %}"></script>
+    <script src="{% static 'assets/js/lightbox.js' %}"></script>
+
+
+
+
+</body>
+
+</html>

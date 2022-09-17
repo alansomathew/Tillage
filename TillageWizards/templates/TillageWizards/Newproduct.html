@@ -1,0 +1,131 @@
+{% extends 'TillageWizards/Head.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         function nameval(elem) {
+            console.log("Haii")
+            var emailexp = /^([A-Za-z ]*)$/;
+            if (elem.value.match(emailexp)) {
+                document.getElementById("name").innerHTML = "";
+                return true;
+            }
+            else {
+
+                document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+        function checkrate(elem) {
+            var numericExpression = /^[0-9]$/;
+            if (elem.value.match(numericExpression)) {
+                document.getElementById("rate").innerHTML = "";
+                return true;
+            }
+            else {
+                document.getElementById("rate").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Add Medicine</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+           
+
+        <tr>
+            <th>Name</th>
+            <td>
+                <input type="text" name="productname" placeholder="Enter Name" autocomplete="off" required
+                onkeyup="nameval(this)">
+            <div id="name"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>Rate</th>
+            <td>
+                <input type="text" name="rate" placeholder="Enter rate" pattern="[0-9]{0-9}" required autocomplete="off">
+              
+            </td>
+        </tr>
+        <tr>
+            <th>Details</th>
+            <td>
+                <input type="text" name="details" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Medicinecategory</th>
+            <td>
+                <select name="medicinecategory" id="medicinecategory">
+                    <option value="">---select---</option>
+                    {% for i in dis %}
+                    <option value="{{ i.id }}">{{ i.medicinecategory }}</option>
+                    {% endfor %}
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Stock</th>
+            <td>
+                <input type="text" name="stock" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Photo</th>
+            <td>
+                <input type="file" name="photo" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="btnsave" value="save">
+                <input type="reset" name="btncancel" value="cancel">
+            </td>
+        </tr>
+    </table>
+    <br>
+    <hr>
+    <br>
+    <table border="1" align="center">
+        <tr>
+            <th>Name</th>
+            <th>Rate</th>
+            <th>Details</th>
+            <th>Stock</th>
+            <th>Photo</th>
+            <th>Mange Stock</th>
+            <th>Action</th>
+        </tr>
+        {% for x in name %}
+        <tr>
+            <td>{{ x.name}}</td>
+            <td>{{ x.rate }}</td>
+            <td>{{ x.details}}</td>
+            <td>{{ x.stock}}</td>
+            <td><img src="{{x.photo.url}}" width="120" height="120"></td>
+            <td><a href="{% url 'TillageWizards:Add-stock' x.id %}">Add stock</a></td>
+            <td><a href="{% url 'TillageWizards:del-product' x.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+</form>
+</div>
+</body>
+</html>
+<br><br><br><br><br><br> 
+{% endblock %}

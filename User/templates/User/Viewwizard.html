@@ -1,0 +1,43 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Myprofile</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: rgb(36, 15, 224);" align="center">
+           
+        <tr>
+
+          {% for i in viewwizard %}
+            <td align="center">
+                <p style="border:1px solid black; align-items: center;">
+                    <img src="{{i.Logo.url}}" width="120" height="120"><br>
+                    {{ i.name}}<br>
+                    {{ i.email }}<br>
+                    {{ i.contact}}<br>
+                    <a href="{% url 'User:help-help' i.id %}">Send help</a>
+
+                </p>
+            </td>
+{% endfor %}
+           
+        </tr>
+    </table>
+    
+    </div>
+</body>
+</html>
+<br><br><br>
+
+{% endblock %}

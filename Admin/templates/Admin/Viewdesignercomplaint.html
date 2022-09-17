@@ -1,0 +1,52 @@
+{% extends 'Admin/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab"  style="width: 100%;padding-left:100px;">
+        <br><br><br> <br>
+    <form method="post">
+        <h1 style="padding-left: 50px; "><b>View Designercomplaint</b></h1>
+        <table border="2" style="background-color: violet;">
+            <tr style="background-color: rgb(7, 163, 20);">
+                <th>Designer</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Content</th>
+                <th>Attachment</th>
+                <th>Status</th>
+            </tr>
+            {%  for i in designer %}
+            <tr>
+                <td>{{i.designer.name}}</td>
+                <td>{{i.designer.contact}}</td>
+                <td>{{i.designer.email}}</td>
+                <td>{{i.doc}}</td>
+                <td>{{i.content}}</td>
+                <td><a href="{{i.attachment.url}}" download>Download</a></td>
+                <td>
+                    {% if i.vstatus == 0 %}
+                
+                <p><a href="{% url 'Admin:reply-designer' i.id %}">Reply</a></p>
+                {% else %}
+                <p>Already Replied</p>
+                {% endif %}
+                {% endfor %}
+                    </td>
+                </tr>
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br>
+{% endblock %}

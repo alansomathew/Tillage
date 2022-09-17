@@ -1,0 +1,43 @@
+{% extends 'TillageWizards/Head.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Myprofile</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+            <tr style="background-color: rgb(7, 163, 20);">
+
+            <td align="center"><img src="{{shop.logo.url}}" width="120" height="120"></td>
+        </tr>
+            <tr>
+                <td>{{shop.name}}</td>
+            </tr>
+            <tr>
+                <td>{{shop.email}}</td>
+            </tr>
+            <tr>
+                <td>{{shop.contact}}</td>
+            </tr>
+    
+            <tr>
+                <td>{{shop.address}}</td>
+            </tr>
+    </table>
+</form>
+</div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

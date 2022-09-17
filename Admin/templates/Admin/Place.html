@@ -1,0 +1,75 @@
+{% extends 'Admin/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab"  style="width: 100%;padding-left:400px;">
+    <br><br><br><br><br>
+    <form method="post" cellspadding="10" align="center">
+        {% csrf_token %}
+        <h1 style="padding-right: 250px; "><b>Add Place</b></h1>
+        <table border="2" align="center" style="background-color: violet;" width="350">
+            <tr>
+                <th>District</th>
+                <td>
+                    <select name="District" id="District">
+                        <option value="">---select---</option>
+                        {% for i in dis %}
+                        <option value="{{ i.id }}">{{ i.district }}</option>
+                        {% endfor %}
+                    </select>
+                </td>
+            </tr>
+            <tr>
+                <th>Place</th>
+                <td style="background-color: violet;">
+                    <input type="text" name="place" value="{{pname.pl}}" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <th>Pincode</th>
+                <td>
+                    <input type="text" name="pincode" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center" style="background-color: violet;">
+                    <input type="submit" name="btnsave" value="save">
+                    <input type="reset" name="btncancel" value="cancel">
+                </td>
+            </tr>
+        </table>
+        <br>
+    <hr>
+    <br>
+    <table border="1" align="center" style="background-color: violet;" >
+        <tr>
+            <th>Place</th>
+            <th>District</th>
+            <th>Pincode</th>
+            <th>Action</th>
+            
+        </tr>
+        {% for x in name %}
+        <tr>
+            <td>{{ x.place }}</td>
+            <td>{{ x.district.district }}</td>
+            <td>{{ x.pincode }}</td>
+            <td><a href="{% url 'Admin:del-place' x.id %}">Delete</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+</div>
+</body>
+</html>
+<br><br><br><br>
+{% endblock %}

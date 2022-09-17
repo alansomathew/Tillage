@@ -1,0 +1,54 @@
+{% extends 'Admin/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab"  style="width: 100%;padding-left:200px;">
+        {% csrf_token %}
+<br><br><br><br><br>
+<h1 style="padding-left: 200px; "><b>New Shop</b></h1>
+    <form method="post">
+        <table border="1" cellpadding="10"  style="background-color: violet;">
+            <tr>
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Place</th>
+                <th>Pincode</th>
+                <th>District</th>
+                <th>Logo</th>
+                <th>Proof</th>
+                <th colspan="2">Action</th>
+            </tr>
+            {% for x in shop %}
+            <tr>
+                <td>{{ x.name }}</td>
+                <td>{{ x.contact }}</td>
+                <td>{{ x.email }}</td>
+                <td>{{ x.address }}</td>
+                <td>{{ x.place.place }}</td>
+                <td>{{ x.place.pincode }}</td>
+                <td>{{ x.place.district.district }}</td>
+                <td><img src="{{x.proof.url}}" width="120" height="120"></td>
+                <td><img src="{{x.logo.url}}" width="120" height="120"></td>
+                <td><a href="{% url 'Admin:Accepted-shop' x.id %}">Accept</a></td>
+                <td><a href="{% url 'Admin:Rejected-shop' x.id %}">Reject</a></td>
+            </tr>
+            {% endfor %}
+
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br>
+{% endblock %}

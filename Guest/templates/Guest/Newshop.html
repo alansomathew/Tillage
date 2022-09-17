@@ -1,0 +1,261 @@
+{% extends 'Guest/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+           function chkpwd(txtrp, txtp)
+{
+	if((txtrp.value)!=(txtp.value))
+	{
+		document.getElementById("pass").innerHTML = "<span style='color: red;'>Passwords Mismatch</span>";
+	}
+}
+
+function checknum(elem)
+{
+	var numericExpression = /^[0-9]{8,10}$/;
+	if(elem.value.match(numericExpression))
+	{
+		document.getElementById("contact").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		document.getElementById("contact").innerHTML = "<span style='color: red;'>10 Numbers Only Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+
+
+
+function emailval(elem)
+{
+	var emailexp=/^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("content").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("content").innerHTML ="<span style='color: red;'>Check Email Address Entered</span>";;
+		elem.focus();
+		return false;
+	}
+}
+function nameval(elem)
+{
+	var emailexp=/^([A-Za-z ]*)$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("name").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+    
+function checknum1(elem)
+{
+	var numericExpression = /^[0-9]{8,10}$/;
+	if(elem.value.match(numericExpression))
+	{
+		document.getElementById("contact1").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		document.getElementById("contact1").innerHTML = "<span style='color: red;'>Numbers Only Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+
+
+
+function emailval1(elem)
+{
+	var emailexp=/^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("email1").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("email1").innerHTML ="<span style='color: red;'>Check Email Address Entered</span>";;
+		elem.focus();
+		return false;
+	}
+}
+function nameval1(elem)
+{
+	var emailexp=/^([A-Za-z ]*)$/;
+	if(elem.value.match(emailexp))
+	{
+		document.getElementById("name1").innerHTML = "";
+		return true;
+	}
+	else
+	{
+		
+		document.getElementById("name1").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+		elem.focus();
+		return false;
+	}
+}
+    </script>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br><br>
+    <form method="post"  enctype="multipart/form-data" id="userform" data-places-url="{% url 'Guest:load-place' %}">
+        {% csrf_token %}
+        <h3 style="padding-left: 600px; "><b>New Shop</b></h3>
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+ 
+        <tr>
+            <th>Name</th>
+            <td>
+                <input type="text" name="name" placeholder="Enter Name" required autocomplete="off" onkeyup="nameval(this)">
+                <div id="name"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>Contact</th>
+            <td>
+                <input type="text" name="contact" placeholder="Enter Number" required autocomplete="off"  pattern="[6-9]{1}[0-9]{9}"  onkeyup="checknum(this)">
+                <div id="contact"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>Email</th>
+            <td>
+                <input type="email" name="email" onkeyup="emailval(this)" required autocomplete="off">
+                <div id="content"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>Address</th>
+            <td>
+                <textarea name="address" required autocomplete="off"></textarea>
+            </td>
+        </tr>
+        <tr>
+            <th>District</th>
+            <td>
+                <select name="District" id="District">
+                    <option value="">---select---</option>
+                    {% for i in dis %}
+                    <option value="{{ i.id }}">{{ i.district }}</option>
+                    {% endfor %}
+                </select>
+                </td>
+        </tr>
+        <tr>
+            <th>Place</th>
+            <td>
+                <select name="Place" id="Place" >
+                    <option value="">---select---</option>
+                </select>
+            </td>
+        </tr>
+        <tr>
+            <th>Logo</th>
+            <td>
+                <input type="file" name="logo" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Proof</th>
+            <td>
+                <input type="file" name="proof" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>OwnerName</th>
+            <td>
+                <input type="text" name="ownername" placeholder="Enter Name" required autocomplete="off" onkeyup="nameval1(this)">
+            <div id="name1"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>OwnerContact</th>
+            <td>
+                <input type="text" name="ownercontact" placeholder="Enter Number" required autocomplete="off"  pattern="[6-9]{1}[0-9]{9}"  onkeyup="checknum1(this)">
+                <div id="contact1"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>OwnerEmail</th>
+            <td>
+                <input type="email" name="owneremail"  onkeyup="emailval1(this)" required autocomplete="off">
+                <div id="email1"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>Password</th>
+            <td>
+                <input type="password" name="password" id="password" pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}" title="Must contain at least one number and one uppercase and lowercase letter, and at least 8 or more characters" required="">
+            </td>
+        </tr>
+        <tr>
+            <th>Re-password</th>
+            <td>
+                <input type="password" name="repassword" onblur="return checkpwd(password,this)" >
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2" align="center">
+                <input type="submit" name="btnsave" value="save">
+                <input type="reset" name="btncancel" value="cancel">
+            </td>
+        </tr>
+    </table>
+    </form>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script>
+$("#District").change(function() {
+    var did = $(this).val();
+    var ur = $("#userform").attr("data-places-url");
+$.ajax({
+    url: ur,
+    data: {disid: did,},
+    success: function(data){
+        $("#Place").html(data);
+      },
+   });
+});
+
+
+function checkpwd(confirm, pass) {
+    if(confirm.value != pass.value){
+        alert("password Mismatch")
+        return false
+    }
+    else{
+        return true
+    }
+    }
+
+</script>
+</html>
+<br><br>
+{% endblock %}

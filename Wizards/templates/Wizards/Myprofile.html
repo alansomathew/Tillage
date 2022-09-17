@@ -1,0 +1,48 @@
+{% extends 'Wizards/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Myprofile</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+            <tr align="center">
+       
+            <td>{{wizard.name}}</td>
+        </tr>
+        <tr align="center">
+            <td>{{wizard.email}}</td>
+        </tr>
+        <tr align="center">
+            <td>{{wizard.contact}}</td>
+        </tr>
+
+        <tr align="center">
+            <td><img src="{{ wizard.license.url}}" width="120" height="120"></td>
+        </tr>
+
+        <tr align="center">
+            <td><img src="{{wizard.Logo.url}}" width="120" height="120"></td>
+        </tr>
+        <tr align="center">
+            <td>{{wizard.details}}</td>
+        </tr>
+    </table>
+    </div>
+</body>
+
+</html>
+<br><br><br>
+{% endblock %}

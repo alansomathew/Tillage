@@ -1,0 +1,38 @@
+{% extends 'TillageWizards/Head.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Shop Feedback</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">          
+             <tr>
+                <th>Feedback</th>
+                <td>
+                    <input type="text" name="feedback" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsave" value="save">
+                    <input type="reset" name="btncancel" value="cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+</div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

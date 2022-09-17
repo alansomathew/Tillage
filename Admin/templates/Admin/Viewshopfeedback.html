@@ -1,0 +1,41 @@
+{% extends 'Admin/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab"  style="width: 100%;padding-left:100px;">
+        <br><br><br> <br><br><br>
+    <form method="post">
+        <h1 style="padding-left: 50px; "><b>View ShopFeedback</b></h1>
+        <table border="2" style="background-color: violet;">
+            <tr style="background-color: rgb(7, 163, 20);">
+                <th>Name</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Feedback</th>
+            </tr>
+            {%  for i in shop %}
+            <tr>
+                <td>{{i.shop.name}}</td>
+                <td>{{i.shop.contact}}</td>
+                <td>{{i.shop.email}}</td>
+                <td>{{i.doc}}</td>
+                <td>{{i.feedback}}</td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Send Help</b></h3><tr>
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+            <table border="2" align="center"  style="background-color: violet;">
+            <tr>
+    <th>Title</th>
+    <td>
+<input type="text" name="title" required autocomplete="off">
+    </td>
+</tr>
+<tr>
+<th>Discription</th>
+<td>
+    <input type="text" name="discription" required autocomplete="off">
+</td>
+</tr>
+<tr>
+    <th>Photo</th>
+    <td>
+        <input type="file" name="photo" required autocomplete="off">
+    </td>
+</tr>
+<tr>
+    <td>Consultation Fees</td>
+    <td><input type="text" value="100" name="cfees" readonly ></td>
+</tr>
+<tr>
+    <td colspan="2" align="center"  style="background-color: violet;">
+        <input type="submit" name="btnsave" value="save">
+        <input type="reset" name="btncancel" value="cancel">
+    </td>
+</tr>
+        </table>
+        <br>
+        <hr>
+        <br>
+        <table border="2" align="center" cellspadding="10">
+            <tr  style="background-color: rgb(7, 163, 20);">
+                <th>Wizard</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Photo</th>
+                <th>Discription</th>
+                <th colspan="">Action</th>
+
+            </tr>
+            {%  for i in complaints %}
+            <tr>
+                <td>{{i.wizard.name}}</td>
+                <td>{{i.wizard.contact}}</td>
+                <td>{{i.wizard.email}}</td>
+                
+                <td>{{i.doc}}</td>
+                <td>{{i.title}}</td>
+                <td><img src="{{i.photo.url}}" width="100" height="100"></td>
+                <td>{{i.discription}}</td>
+
+                <td>
+                    {% if i.vstatus == 0 %}
+                    <p>Pending</p>
+                    {% elif i.vstatus == 1 %}
+                   
+                    <a href="{% url 'User:Consultations' i.id %}">Chat Now</a>
+                    {% else %}
+                    <p>Rejected..</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+            </tr>
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br><br><br>
+{% endblock %}

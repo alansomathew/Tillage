@@ -1,0 +1,82 @@
+{% extends 'Wizards/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         function nameval(elem) {
+            console.log("Haii")
+            var emailexp = /^([A-Za-z ]*)$/;
+            if (elem.value.match(emailexp)) {
+                document.getElementById("name").innerHTML = "";
+                return true;
+            }
+            else {
+
+                document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+         function checknum(elem) {
+            var numericExpression = /^[0-9]{8,10}$/;
+            if (elem.value.match(numericExpression)) {
+                document.getElementById("contact").innerHTML = "";
+                return true;
+            }
+            else {
+                document.getElementById("contact").innerHTML = "<span style='color: red;'>10 Numbers Only Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+    </script>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Editprofile</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+            <tr>
+                <th>Name</th>
+                <td>
+                    <input type="text" name="name" value="{{user.name}}"placeholder="Enter Name" autocomplete="off" required
+                    onkeyup="nameval(this)">
+                <div id="name"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>Contact</th>
+                <td>
+                    <input type="text" name="contact" value="{{user.contact}}"placeholder="Enter Number" required autocomplete="off"
+                    pattern="[6-9]{1}[0-9]{9}" onkeyup="checknum(this)">
+                    <div id="contact"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>Address</th>
+                <td>
+                    <textarea name="address" required autocomplete="off">{{user.details}}</textarea>
+                </td>
+            </tr>
+            
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsave" value="save">
+                    <input type="reset" name="btncancel" value="cancel">
+                </td>
+            </tr>
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br>
+{% endblock %}

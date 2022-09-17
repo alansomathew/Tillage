@@ -1,0 +1,82 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<script type="text/javascript">
+    function getPrice(){
+        var rate=document.getElementById("rate").value;
+        var qty=document.getElementById("quantity").value;
+        var total=rate*qty;
+        var per=total*0.05;
+        var grand=per+total;
+        document.getElementById("shippingcharge").value=per;
+        document.getElementById("totalprice").value=grand;
+    }
+ </script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div id="tab">
+        <br><br><br>  <br><br><br>  <br><br><br>
+   <form method="post">
+    {% csrf_token %}
+    <br>
+    <hr>
+    <br>
+    <table  border="2" cellspadding="10" align="center">
+        <tr>
+
+          
+            <td colspan="2" align="center">
+                
+                    <img src="{{name.photo.url}}" width="120" height="120"><br>
+                    {{ name.name}}<br>
+                    {{ name.rate }}<br>
+                    {{ name.details}}<br>
+                
+<input type="hidden" id="rate" value="{{name.rate}}">
+                
+            </td>
+          </tr>
+          
+         
+        <tr>
+            <th>Quantity</th>
+            <td>
+                <input type="number" name="quantity" id="quantity" min="1" max="{{name.stock}}" onchange="getPrice()" required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Shippingcharge</th>
+            <td>
+                <input type="text" name="shippingcharge" id="shippingcharge" required readonly autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <th>Totalprice</th>
+            <td>
+                <input type="text" name="totalprice" id="totalprice"  required autocomplete="off">
+            </td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="submit" name="btnsave" value="save">
+                <input type="reset" name="btncancel" value="cancel">
+            </td>
+        </tr>
+    </table> 
+   </form>
+</div>
+</body>
+</html>
+<br><br><br>  <br><br><br>
+
+{% endblock %}

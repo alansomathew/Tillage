@@ -1,0 +1,121 @@
+
+{% extends 'Designer/Head.html' %}
+
+
+{% block content %}<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script>
+         function nameval(elem) {
+            console.log("Haii")
+            var emailexp = /^([A-Za-z ]*)$/;
+            if (elem.value.match(emailexp)) {
+                document.getElementById("name").innerHTML = "";
+                return true;
+            }
+            else {
+
+                document.getElementById("name").innerHTML = "<span style='color: red;'>Alphabets Are Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+        function emailval(elem) {
+            var emailexp = /^([a-zA-Z0-9.\_\-])+\@([a-zA-Z0-9.\_\-])+\.([a-zA-Z]{2,4})$/;
+            if (elem.value.match(emailexp)) {
+                document.getElementById("email").innerHTML = "";
+                return true;
+            }
+            else {
+
+                document.getElementById("email").innerHTML = "<span style='color: red;'>Check Email Address Entered</span>";;
+                elem.focus();
+                return false;
+            }
+        }
+        function checknum(elem) {
+            var numericExpression = /^[0-9]{8,10}$/;
+            if (elem.value.match(numericExpression)) {
+                document.getElementById("contact").innerHTML = "";
+                return true;
+            }
+            else {
+                document.getElementById("contact").innerHTML = "<span style='color: red;'>10 Numbers Only Allowed</span>";
+                elem.focus();
+                return false;
+            }
+        }
+        
+    </script>
+</head>
+<body>
+    <br>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>Add Services</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+
+            <tr>
+                <th>Modelname</th>
+                <td>
+                    <input type="text" name="modelname" placeholder="Enter Name" autocomplete="off" required
+                    onkeyup="nameval(this)">
+                <div id="name"></div>
+                </td>
+            </tr>
+            <tr>
+                <th>Rate</th>
+                <td>
+                    <input type="text" name="rate" placeholder="Enter rate" required autocomplete="off" pattern="[0-9]{1-10}">
+                </td>
+            </tr>
+            <tr>
+                <th>Details</th>
+                <td>
+                    <input type="text" name="details" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <th>Photo</th>
+                <td>
+                    <input type="file" name="photo" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" align="center">
+                    <input type="submit" name="btnsubmit" value="submit">
+                    <input type="reset" name="btnreset"  value="cancel">
+                </td>
+            </tr>
+        </table>
+        <br>
+        <hr>
+        <br>
+        <table border="1" align="center">
+            <tr>
+                <th>Name</th>
+                <th>Rate</th>
+                <th>Details</th>
+                <th>Photo</th>
+            </tr>
+            {% for x in name %}
+            <tr>
+                <td>{{ x.name}}</td>
+                <td>{{ x.rate }}</td>
+                <td>{{ x.details}}</td>
+                <td><img src="{{x.logo.url}}" width="120" height="120"></td>
+                
+                <td><a href="{% url 'Designer:del-Services' x.id %}">Delete</a></td>
+            </tr>
+            {% endfor %}
+    </form>
+</div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br>
+{% endblock %}

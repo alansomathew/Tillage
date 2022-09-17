@@ -1,0 +1,48 @@
+{% extends 'TillageWizards/Head.html' %}
+
+
+{% block content %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab">
+        <div id="tab" style="width: 100%;padding-left:100px;">
+            <br><br><br><br><br><br>
+            <h3 style="padding-left: 550px; "><b>View-Orders Medicine</b></h3>
+        <form method="post">
+            <table border="2" width="350px" style="background-color: violet;" align="center">
+               
+        <tr style="background-color: rgb(7, 163, 20);">
+
+            {% for x in medicine %}
+            <td>
+                <p style="border:1px solid black; align-items: center;">
+                    <img src="{{x.medicine.photo.url}}" width="120" height="120"><br>
+                    {{ x.medicine.name}}<br>
+                    {{ x.medicine.rate }}<br>
+                    {{ x.medicine.details}}<br>
+                    {{ x.quantity}}<br>
+                    {{ x.totalprice}}<br>
+                    {{ x.delivering}}<br>
+                    
+                    <td><a href="{% url 'TillageWizards:Accepted-medicine' x.id %}">Accept</a></td>
+                    <td><a href="{% url 'TillageWizards:Rejected-medicine' x.id %}">Reject</a></td>
+                </p>
+            </td>
+        </tr>
+            {% endfor %}
+       
+    </table>
+    </form>
+</div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+{% endblock %}

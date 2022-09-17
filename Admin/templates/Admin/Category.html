@@ -1,0 +1,54 @@
+{% extends 'Admin/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab"  style="width: 100%;padding-left:350px;" >
+    <br><br><br><br><br>
+    <form method="post" cellspadding="10" align="center">
+        {% csrf_token %}
+        <h1 style="padding-right: 300px; "><b>Add Category</b></h1>
+        <table border="2" align="center" width="350" style="background-color: violet;" >
+            <tr>
+                <th>Category</th>
+                <td>
+                    <input type="text" name="category" value="{{cname.category}}" required autocomplete="off">
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="background-color: violet;" >
+                    <input type="submit" name="btnsubmit" value="save">
+                    <input type="reset" name="btncancel" value="cancel">
+                </td>
+         </tr>
+        </table>
+        <br>
+    <hr>
+    <br>
+    <table border="1" align="center" style="background-color: violet;" >
+        <tr>
+            <th>Category</th>
+            <th colspan="2">Action</th>
+        </tr>
+        {% for x in name %}
+        <tr>
+            <td>{{ x.category }}</td>
+            <td><a href="{% url 'Admin:del-cat' x.id %}">Delete</a></td>
+            <td><a href="{% url 'Admin:edit-cat' x.id %}">Edit</a></td>
+        </tr>
+        {% endfor %}
+    </table>
+    </form>
+</div>
+</body>
+</html>
+<br><br><br><br>
+{% endblock %}

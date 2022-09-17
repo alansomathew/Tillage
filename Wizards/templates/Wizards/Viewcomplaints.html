@@ -1,0 +1,61 @@
+{% extends 'Wizards/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div id="tab" style="width: 100%;padding-left:100px;">
+        <br><br><br><br><br><br>
+        <h3 style="padding-left: 550px; "><b>ViewComplaints</b></h3>
+    <form method="post">
+        <table border="2" width="350px" style="background-color: violet;" align="center">
+            <tr style="background-color: rgb(7, 163, 20);">
+                <th>User</th>
+                <th>Contact</th>
+                <th>Email</th>
+                <th>Place</th>
+                <th>Date</th>
+                <th>Title</th>
+                <th>Photo</th>
+                <th>Discription</th>
+                <th colspan="">Action</th>
+
+            </tr>
+            {%  for i in complaints %}
+            <tr>
+                <td>{{i.user.name}}</td>
+                <td>{{i.user.contact}}</td>
+                <td>{{i.user.email}}</td>
+                <td>{{i.user.place.place}}</td>
+                <td>{{i.doc}}</td>
+                <td>{{i.title}}</td>
+                <td><img src="{{i.photo.url}}" width="100" height="100"></td>
+                <td>{{i.discription}}</td>
+
+                <td>
+                    {% if i.vstatus == 0 %}
+                    <a href="{% url 'Wizards:Accept-Help' i.id %}">Accept</a>
+                    <a href="{% url 'Wizards:Reject-Help' i.id %}">Reject</a>
+                    {% elif i.vstatus == 1 %}
+                   
+                    <a href="">Chat Now</a>
+                    {% else %}
+                    <p>Rejected..</p>
+                    {% endif %}
+                </td>
+            </tr>
+            {% endfor %}
+        </table>
+    </form>
+    </div>
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br>
+{% endblock %}

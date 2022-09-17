@@ -1,0 +1,71 @@
+{% extends 'User/Head.html' %}
+
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <body>
+        <div id="tab" style="width: 100%;padding-left:100px;">
+            <br><br><br><br><br><br>
+            <h3 style="padding-left: 550px; "><b>My Bookproduct</b></h3>
+        <form method="post">
+            <table border="2" width="350px" style="background-color: violet;" align="center">
+                <tr style="background-color: rgb(7, 163, 20);">
+    
+                    <th>Photo</th>
+                    <th>Name</th>
+                    <th>Rate</th>
+                
+                    <th>Quantity</th>
+                    <th>Bookingdate</th>
+                    <th>Totalprice</th>
+                    <th>Delivering</th>
+                    <th>Action</th>
+                </tr>
+    
+                {% for x in product %}
+                <tr>
+                   <td> <img src="{{x.product.photo.url}}" width="120" height="120">
+                </td>
+                <td>{{ x.product.name}} </td>
+                <td>{{ x.product.rate }} </td>
+        
+                <td>{{ x.quantity}} </td>
+                <td>{{x.bod}} </td>
+                <td>{{ x.totalprice}} </td>
+                <td>{{ x.delivering}} </td>
+                <td>
+                <a href="{% url 'User:Send-productcomplaint' x.product.user.id %}">Send productcomplaint </a>
+
+                {% if x.vstatus == 1 %}
+                {% if x.pstatus == 0%}
+                <a href="{% url 'User:Pay-nowpro' x.id %}">Pay </a>
+                {% elif x.pstatus == 1 %}
+                <p>Paid..</p>
+                {% endif %}
+                {% elif x.vstatus == 2 %}
+                <p>Rejected</p>
+                {% else %}
+                <p>Pending..</p>
+                {% endif %}
+            </td>
+                </tr>
+    
+                {% endfor %}
+                
+            </table>
+    
+        </form>
+        </div>
+</body>
+</html>
+<br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>  <br><br><br>
+
+{% endblock %}
